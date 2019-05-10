@@ -1,0 +1,132 @@
+#MEAN FOR X AND Y
+x = [6,7,9,11,18,23,29]
+y = [2,4,17,19,21,22,26]
+n = len(x)
+m = len(y)
+sum_i = 0
+sum_j = 0
+
+for i in x:
+  sum_i += i
+meanx = round(sum_i/n,2)
+
+for j in y:
+  sum_j += j
+meany = round(sum_j/m,2)
+print('Mean for X and Y is:',meanx,'and',meany)
+
+#VARIANCE FOR X AND Y
+varx = 0
+vary = 0
+t = 0
+u = 0
+for i in x:
+    varx += (i-meanx)**2
+varx = round(varx,2)/n  
+
+for j in y:
+    vary += (j-meany)**2
+vary = round(vary,2)/m  
+print('Variance of X and Y is:',varx,'and',vary)
+
+#COVARIANCE BETWEEN X AND Y
+covar = 0;cvx=0;cvy=0
+for i, j in zip(x,y):
+        covar += (i-meanx)*(j-meany)
+
+covar = round(covar/(n-1),2)
+#covar = cvx*cvy/n
+print('Covariance between X and Y is:',covar)
+
+#Problem 2
+#Euclidean distance between two vectors
+import math
+a = [2,3,-2]
+b = [-1,5,3]
+dist_e = 0
+dist_m = 0
+for i,j in zip(a,b):
+    dist_e += (i-j)**2
+    dist_m += abs(i-j)
+    
+dist_e = math.sqrt(dist_e)
+dist_e = round(dist_e,2)
+print('Euclidean distance between a and b is:',dist_e)
+print('Manhattan distance between a and b is:',dist_m)
+
+#Cosine similarity
+dot = 0;a_mag=0;b_mag=0
+for i,j in zip(a,b):
+    dot += i*j
+    a_mag += i**2
+    b_mag += j**2
+    
+a_mag = round(math.sqrt(a_mag),2)
+b_mag = round(math.sqrt(b_mag),2)
+cos_sim = round(dot/(a_mag*b_mag),2)
+print('Cosine Similarity between a and b is:',cos_sim)
+
+#Implement a function that returns  Pearson correlation coefcient
+std_x = math.sqrt(varx)
+std_y = math.sqrt(vary)
+pearson = round(covar/(std_x*std_y),2)
+print('Pearson Coefficient for X and Y is:',pearson)
+
+#Problem 3:
+import numpy as np
+x = np.loadtxt('data1.dat', usecols=(0))
+y = np.loadtxt('data1.dat', usecols=(1))
+z = np.loadtxt('data1.dat', usecols=(2))
+
+l = len(x)
+m = len(y)
+n = len(z)
+sum_i = 0
+sum_j = 0
+sum_k = 0
+for i in x:
+  sum_i += i
+meanx = round(sum_i/l,2)
+for j in y:
+  sum_j += j
+meany = round(sum_j/m,2)
+for k in z:
+  sum_k += k
+meanz = round(sum_k/n,2)
+print('Mean for X, Y and Z is:',meanx, meany,'and',meanz)
+#---------------------------------------------------------------
+varx = 0
+vary = 0
+varz = 0
+s = 0
+t = 0
+u = 0
+for i in x:
+    varx += (i-meanx)**2
+varx = round(varx,2)/l  
+for j in y:
+    vary += (j-meany)**2
+vary = round(vary,2)/m  
+for k in z:
+    varz += (k-meanz)**2
+varz = round(varz,2)/n  
+print('Variance of X, Y and Z is:',varx,vary,'and',varz)
+covar = 0;cvx=0;cvy=0
+for i, j in zip(x,y):
+        covar += (i-meanx)*(j-meany)
+
+covar = round(covar/(l-1),2)
+print('Covariance between X and Y is:',covar)
+
+#---------------------------------------------------------------
+import math
+std_x = math.sqrt(varx)
+std_y = math.sqrt(vary)
+pearson = round(covar/(std_x*std_y),2)
+print('Pearson Coefficient for X and Y is:',pearson)
+
+import matplotlib.pyplot as plt
+plt.xlabel('X')
+plt.ylabel('Y')
+plt.scatter(x,y)
+plt.show()
